@@ -3,10 +3,10 @@ name: C Build with MinGW64
 on:
   push:
     branches:
-      - main
+      - catgen
   pull_request:
     branches:
-      - main
+      - catgen
 
 jobs:
   build:
