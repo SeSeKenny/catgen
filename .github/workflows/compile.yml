@@ -23,7 +23,9 @@ jobs:
       shell: cmd
 
     - name: Compile C program
-      run: mingw32-make -f makefile
+      run: |
+        cd ${{ github.workspace }}
+        mingw32-make -f makefile
 
     - name: Archive build
       uses: actions/upload-artifact@v2
