@@ -1,0 +1,32 @@
+name: C Build with MinGW64
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up MinGW64
+      run: |
+        choco install mingw --version=8.1.0
+        echo "::add-path::C:\tools\mingw64\bin"
+      shell: cmd
+
+    - name: Compile C program
+      run: mingw32-make -f makefile
+
+    - name: Archive build
+      uses: actions/upload-artifact@v2
+      with:
+        name: catgen-executable
+        path: catgen.exe
